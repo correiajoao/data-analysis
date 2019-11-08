@@ -7,19 +7,18 @@ João Correia
 
 In this notebook, we will explore each step in the script
 [Effectiveness.R](https://github.com/correiajoao/data-analysis/blob/master/Effectiveness.R).
-The script explores a dataset containing software metrics and developers
-perception about the presence of code smells in that code or not.
+The script explores a dataset containing software metrics and
+developer’s perception about the presence of code smells in that code
+or not.
 
 ### Importing pacakges
 
-The first lines in the code, imports the required packages from the
-processing.
+The first lines in code imports the required for execution.
 
 ``` r
 library(RWeka)
 library(e1071)
 library(gmodels)
-library(C50)
 library(caret)
 ```
 
@@ -52,10 +51,10 @@ library(randomForest)
 
 ### Functions to calculate model’s metrics
 
-Using the results provided by confusing matrix: true positives, true
-negatives, false positives and false negatives; the following functions
+Using the results provided by the confusing matrix: true positives, true
+negatives, false positives, and false negatives; the following functions
 calculate individual metrics from the model’s performance. The metrics
-are: precision, recall and f-Measure.
+are precision, recall, and f-Measure.
 
 ``` r
 # Precision
@@ -79,9 +78,9 @@ f_measure <- function(tp, fp, fn){
 
 ### Functions to compute confusing matrix
 
-Given the predction performed by the model and the test set, the
+Given the prediction performed by the model and the test set, the
 function below computes the confusing matrix and returns in array format
-the model’s precision, recall and f-measure.
+the model’s precision, recall, and f-measure.
 
 ``` r
 measures <- function(test, pred){
@@ -114,12 +113,11 @@ measures <- function(test, pred){
 ### Functions to perform the machine learning algorithms
 
 The following functions, receive as arguments the dataset and the number
-of folders. Using these arguments, the function split the dataset in
-train and test. The function build a model using the training subset,
-then using the same model, predicts the intances from the test subset.
-Aftet that, pass the predction and the test subset for the function that
-computes the confusing matrix and the model’s metrics, returning that
-metrics.
+of folders. Each function splits the dataset in train and test. The
+function builds a model using the training subset, then predicts the
+instances from the test subset. After that, pass the prediction and the
+test subset for the function that computes the confusion matrix and the
+model’s metrics, returning those metrics.
 
 The algorithms are: - J48 - Naive Bayes - C50 - SVM - One R - JRip -
 Random Forest - SMO
@@ -239,8 +237,8 @@ executeSMO <- function(dataset, folds){
 
 ### Creating data frames
 
-In the execution, the first step is to define arrays and dataframes
-containing algoritms, developers and
+In the execution, the first step is to define arrays and data frames
+containing algorithms, developers, and
 smells.
 
 ``` r
@@ -264,8 +262,8 @@ list_of_results <- list()
 
 ### Training models
 
-The code below interates over each developer and smell, performing the
-train and calculating metrics for each generated model. Each developer
+The code below iterates over each developer and smells, performing the
+train, and calculating metrics for each generated model. Each developer
 (total 10) has an opinion about one code smell (total 12). For each pair
 (developer, smell), all the seven machine learning algorithm is
 performed, and the metrics were stored.
@@ -2049,8 +2047,8 @@ for(j in 1:10){
 
 ### Print partial results
 
-After the training and evaluation were performed, the folling print
-occours. That print shows a matrix containing the precision obtained for
+After the training and evaluation were performed, the following print
+occurs. That print shows a matrix containing the precision obtained for
 each algorithm in predicts the developer brief about code smells
 presence in a piece of code.
 
@@ -2621,7 +2619,7 @@ for(smell in 1:10){
 
 ### Mean of results
 
-Althoug the code below seems to be complex, they just calculates the
+Although the code below seems to be complex, they just calculate the
 mean of the results obtained by the algorithms in the prediction of
 conde smells, considering all developers.
 
@@ -2649,9 +2647,9 @@ for(smell in 2:10){
 
 ### Ploting graph
 
-Finaally the lest block of code is used to set and print a chart
+Finaally, the lest block of code is used to set and print a chart
 relating code smells and the effectiveness of the machine learning
-algorithms in predict them using developers opinion.
+algorithms to predict them using the developer’s opinion.
 
 ``` r
 colnames(results_mean) <- techniques
